@@ -27,7 +27,7 @@ public class SplashScreen extends AppCompatActivity {
                 startActivity(new Intent(this, LoginActivity.class));
             }
         }else{
-            Toast.makeText(this,"No tiene Internet",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"No tiene Internet. Gracias.",Toast.LENGTH_LONG).show();
         }
 
     }

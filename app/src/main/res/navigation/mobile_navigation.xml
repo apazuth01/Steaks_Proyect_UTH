@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_menu">
+
+    <fragment
+        android:id="@+id/navigation_menu"
+        android:name="com.uth.steaks.ui.menu.FragmentTabsMenu"
+        android:label="@string/Menu" />
+
+    <fragment
+        android:id="@+id/navigation_pedidos"
+        android:name="com.uth.steaks.ui.pedidos.FragmentPedidos"
+        android:label="@string/Pedidos"
+        tools:layout="@layout/fragment_pedidos" />
+
+    <fragment
+        android:id="@+id/navigation_perfil"
+        android:name="com.uth.steaks.ui.perfil.FragmentPerfil"
+        android:label="@string/Perfil"
+        tools:layout="@layout/fragment_perfil" />
+</navigation>

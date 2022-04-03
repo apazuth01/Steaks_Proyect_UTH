@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Steaks</string>
+    <string name="Menu">Menu</string>
+    <string name="Pedidos">Pedidos</string>
+    <string name="Perfil">Perfil</string>
+    <string name="hoy">Hoy</string>
+    <string name="desayunos">Desayunos</string>
+    <string name="almuerzos">Almuerzos</string>
+    <string name="cenas">Cenas</string>
+    <string name="complementos">Complementos</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titulo">Titulo</string>
+    <string name="todo">TODO</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="_150_00">150.00</string>
+    <string name="ItemTitle">ItemTitle</string>
+    <string name="enviar_orden">Enviar Orden</string>
+    <string name="_0_00">0.00</string>
+    <string name="mas">+</string>
+    <string name="menos">-</string>
+    <string name="_1">1</string>
+    <string name="estado_pendiente">Estado : Pendiente</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="todos">TODO</string>
+    <string name="_50432068276">+50432068276</string>
+    <string name="ciudad">Ciudad</string>
+
+
+</resources>

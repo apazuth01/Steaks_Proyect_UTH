@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "817720090988",
+    "firebase_url": "https://provenir-steaks-default-rtdb.firebaseio.com",
+    "project_id": "provenir-steaks",
+    "storage_bucket": "provenir-steaks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817720090988:android:f6565764ac5bfd65391349",
+        "android_client_info": {
+          "package_name": "com.uth.steaks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817720090988-p7t56i8rkpe56qe128kpqeu8s0cb4ai9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3C86djV6IceoYRMuELwNsX_n0lcdlwl8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "817720090988-p7t56i8rkpe56qe128kpqeu8s0cb4ai9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

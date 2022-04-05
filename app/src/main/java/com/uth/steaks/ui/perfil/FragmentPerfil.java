@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -71,14 +72,16 @@ public class FragmentPerfil extends Fragment {
             map.put("doc_ciudad", txtCiudad.getText().toString());
 
             db.collection("clt_clientes").document(Phone).update(map);
+            Toast.makeText(getContext(),"Datos Actualizados Exitosamente",Toast.LENGTH_LONG).show();
         });
 
 
-
+        Log.d("TAG Phone", "onCreateView: " + Phone );
         DocumentReference docRef = db.collection("clt_clientes").document(Phone);
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
+
                 if (document.exists()) {
 
                     TextView txtPhone = view.findViewById(R.id.txtPhone);

@@ -140,16 +140,16 @@ public class LoginActivity extends AppCompatActivity {
 
         };
 
-        SharedPreferences sharedPreferences = getSharedPreferences("getToken", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(task -> {
                     token = task.getResult();
-                    editor.putString("token",token);
-                    editor.apply();
                 });
 
+        SharedPreferences sharedPreferences = getSharedPreferences("getToken", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("token",token);
+        editor.apply();
 
 
 

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -137,6 +138,10 @@ public class ProductoActivity extends AppCompatActivity {
 
                                     db.collection("clt_pedidos").document().set(maps);
 
+                                    Toast.makeText(getApplicationContext(),"Su Orden ha sido creada.",Toast.LENGTH_LONG).show();
+
+                                    finish();
+
 
                                 }else{
 
@@ -156,6 +161,10 @@ public class ProductoActivity extends AppCompatActivity {
                                             .update(
                                                     "doc_detalles", FieldValue.arrayUnion(MapDetalles)
                                             );
+
+                                    Toast.makeText(getApplicationContext(),"El producto ha sido agregado al pedido. ",Toast.LENGTH_LONG).show();
+
+                                    finish();
 
                                 }
 

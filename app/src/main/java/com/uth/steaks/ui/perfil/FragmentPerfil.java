@@ -102,10 +102,6 @@ public class FragmentPerfil extends Fragment {
         });
 
 
-
-
-
-
         return view;
     }
 

@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.uth.steaks.ui.menu.TabPages.FragmentMenuAlmuerzos;
+import com.uth.steaks.ui.menu.TabPages.FragmentMenuBebidas;
 import com.uth.steaks.ui.menu.TabPages.FragmentMenuCenas;
 import com.uth.steaks.ui.menu.TabPages.FragmentMenuDesayunos;
 import com.uth.steaks.ui.menu.TabPages.FragmentMenuHoy;
@@ -35,6 +36,7 @@ public class FragmentTabsMenu extends Fragment {
         tabPageAdapter.addFragment(new FragmentMenuDesayunos());
         tabPageAdapter.addFragment(new FragmentMenuAlmuerzos());
         tabPageAdapter.addFragment(new FragmentMenuCenas());
+        tabPageAdapter.addFragment(new FragmentMenuBebidas());
 
         viewPager2.setAdapter(tabPageAdapter);
 
@@ -51,6 +53,9 @@ public class FragmentTabsMenu extends Fragment {
                     break;
                 case 3:
                     tab.setText("Cena");
+                    break;
+                case 4:
+                    tab.setText("Bebidas");
                     break;
             }
         }).attach();

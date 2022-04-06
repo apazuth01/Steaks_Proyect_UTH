@@ -21,4 +21,9 @@
         android:name="com.uth.steaks.ui.perfil.FragmentPerfil"
         android:label="@string/Perfil"
         tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/navigation_delivery"
+        android:name="com.uth.steaks.DeliveryFragment"
+        android:label="@string/delivery"
+        tools:layout="@layout/fragment_delivery" />
 </navigation>

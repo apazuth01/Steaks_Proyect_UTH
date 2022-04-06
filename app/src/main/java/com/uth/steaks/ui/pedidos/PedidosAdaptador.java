@@ -3,8 +3,7 @@ package com.uth.steaks.ui.pedidos;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
+import com.uth.steaks.MapActivity;
 import com.uth.steaks.R;
 
 import java.text.SimpleDateFormat;
@@ -51,65 +48,76 @@ public class PedidosAdaptador extends FirestoreRecyclerAdapter<PedidosConstructo
     protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull PedidosConstructor model) {
         holder.txtEstado.setText("Estado: "+model.getDoc_estado());
         holder.txtPedido.setText("#Pedido: "+model.getDoc_orden());
-        holder.txtTotales.setText(model.getDoc_total());
+        holder.txtTotales.setText(model.getDoc_total().toString());
         holder.txtFecha.setText(format.format(model.getDoc_fecha()));
 
         holder.itemPedido.setOnClickListener(view -> {
 
             if (model.getDoc_estado().equals("Editando")){
 
-                db.collection("clt_pedidos")
 
-                        .whereEqualTo("doc_orden",model.getDoc_orden())
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()){
-                                    if (!task.getResult().isEmpty()){
-                                        String idOrden = task.getResult().getDocuments().get(0).getId();
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(ctx);
+                builder1.setMessage("Confirma que la Orden esta lista?.");
+                builder1.setCancelable(true);
 
-                                        AlertDialog.Builder builder1 = new AlertDialog.Builder(ctx);
-                                        builder1.setMessage("Confirma que la Orden esta lista?.");
-                                        builder1.setCancelable(true);
+                builder1.setPositiveButton(
+                        "Yes",
+                        (dialog, id) -> {
 
-                                        builder1.setPositiveButton(
-                                                "Yes",
-                                                new DialogInterface.OnClickListener() {
-                                                    public void onClick(DialogInterface dialog, int id) {
+                            Map<String, Object> map = new HashMap<>();
+                            map.put("doc_estado", "Pendiente");
+                            map.put("doc_fecha", new Timestamp(new Date()));
 
-                                                        Map<String, Object> map = new HashMap<>();
-                                                        map.put("doc_estado", "Pendiente");
-                                                        map.put("doc_fecha", new Timestamp(new Date()));
+                            db.collection("clt_pedidos").document(model.getDoc_orden()).update(map);
 
-                                                        db.collection("clt_pedidos").document(idOrden).update(map);
+                            Toast.makeText(ctx,"Su Orden ha sido enviada.",Toast.LENGTH_LONG).show();
+                            dialog.cancel();
 
-                                                        Toast.makeText(ctx,"Su Orden ha sido enviada.",Toast.LENGTH_LONG).show();
-                                                        dialog.cancel();
-
-
-                                                    }
-                                                });
-
-                                        builder1.setNegativeButton(
-                                                "No",
-                                                new DialogInterface.OnClickListener() {
-                                                    public void onClick(DialogInterface dialog, int id) {
-                                                        dialog.cancel();
-                                                    }
-                                                });
-
-                                        AlertDialog alert11 = builder1.create();
-                                        alert11.show();
-
-
-
-                                    }
-                                }else{
-                                    Log.d("TAG", "onComplete: No se han recuperado los datos");
-                                }
-                            }
                         });
+
+                builder1.setNegativeButton(
+                        "No",
+                        (dialog, id) -> dialog.cancel());
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
+
+            }else if(model.getDoc_estado().equals("Enviado")){
+
+//                AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+//                builder.setMessage("Confirma la entrega del pedido?.");
+//                builder.setCancelable(true);
+//
+//                builder.setPositiveButton(
+//                        "Yes",
+//                        (dialog, id) -> {
+//
+//                            Map<String, Object> map = new HashMap<>();
+//                            map.put("doc_estado", "Entregado");
+//                            map.put("doc_fecha", new Timestamp(new Date()));
+//
+//                                db.collection("clt_pedidos").document(model.getDoc_orden()).update(map);
+//
+//                            Toast.makeText(ctx,"Su Orden ha sido entregada.",Toast.LENGTH_LONG).show();
+//                            dialog.cancel();
+//
+//                        });
+//
+//                builder.setNegativeButton(
+//                        "No",
+//                        (dialog, id) -> dialog.cancel());
+//
+//                AlertDialog alert = builder.create();
+//                alert.show();
+
+                Intent intent = new Intent(ctx, MapActivity.class);
+                intent.putExtra("Pedido",model.getDoc_orden());
+                intent.putExtra("Geo", String.valueOf(model.getDoc_geo()));
+                intent.putExtra("Cliente",model.getDoc_cliente());
+                intent.putExtra("Direccion",model.getDoc_direccion());
+
+                ctx.startActivity(intent);
+
 
             }
 

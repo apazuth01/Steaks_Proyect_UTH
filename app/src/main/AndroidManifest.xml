@@ -14,9 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Steaks">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB3C86djV6IceoYRMuELwNsX_n0lcdlwl8" />
+
+        <activity
+            android:name=".MapActivity"
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ProductoActivity"
             android:exported="false">

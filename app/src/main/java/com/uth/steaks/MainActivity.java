@@ -1,5 +1,6 @@
 package com.uth.steaks;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,9 +9,15 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.uth.steaks.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+
+
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
     @Override
@@ -21,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_menu, R.id.navigation_pedidos, R.id.navigation_perfil)
+                R.id.navigation_menu, R.id.navigation_pedidos, R.id.navigation_perfil,R.id.navigation_delivery)
                 .build();
 
         NavController navController = Navigation.findNavController(this,
@@ -29,6 +36,20 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("getProfile", MODE_PRIVATE);
+        String Phone = sharedPreferences.getString("phone",null);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
+        db.collection("clt_clientes").document(Phone)
+                .get()
+                .addOnCompleteListener(task -> {
+                   if (task.getResult().get("doc_delivery").equals(true)){
+                       bottomNavigationView.getMenu().getItem(3).setVisible(true);
+                   }else{
+                       bottomNavigationView.getMenu().getItem(3).setVisible(false);
+                   }
+
+                });
 
 
     }

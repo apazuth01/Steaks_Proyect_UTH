@@ -15,7 +15,9 @@ import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,11 +31,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -122,6 +128,21 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         )
         );
 
+        Button btnEntregar = findViewById(R.id.btnEntregado);
+
+        btnEntregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("doc_estado", "Entregado");
+                map.put("doc_fecha", new Timestamp(new Date()));
+
+                db.collection("clt_pedidos").document(Pedido).update(map);
+
+                Toast.makeText(getApplicationContext(),"Su Orden ha sido entregada.",Toast.LENGTH_LONG).show();
+                finish();
+            }
+        });
 
     }
 

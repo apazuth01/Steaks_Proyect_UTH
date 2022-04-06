@@ -84,31 +84,7 @@ public class PedidosAdaptador extends FirestoreRecyclerAdapter<PedidosConstructo
 
             }else if(model.getDoc_estado().equals("Enviado")){
 
-//                AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-//                builder.setMessage("Confirma la entrega del pedido?.");
-//                builder.setCancelable(true);
-//
-//                builder.setPositiveButton(
-//                        "Yes",
-//                        (dialog, id) -> {
-//
-//                            Map<String, Object> map = new HashMap<>();
-//                            map.put("doc_estado", "Entregado");
-//                            map.put("doc_fecha", new Timestamp(new Date()));
-//
-//                                db.collection("clt_pedidos").document(model.getDoc_orden()).update(map);
-//
-//                            Toast.makeText(ctx,"Su Orden ha sido entregada.",Toast.LENGTH_LONG).show();
-//                            dialog.cancel();
-//
-//                        });
-//
-//                builder.setNegativeButton(
-//                        "No",
-//                        (dialog, id) -> dialog.cancel());
-//
-//                AlertDialog alert = builder.create();
-//                alert.show();
+
 
                 Intent intent = new Intent(ctx, MapActivity.class);
                 intent.putExtra("Pedido",model.getDoc_orden());

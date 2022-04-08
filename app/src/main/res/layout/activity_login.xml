@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
+    <TextView
+        android:id="@+id/txtCiudadActual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Ciudad Actual"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciar" />
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
@@ -15,7 +25,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIniciar" />
+        app:layout_constraintTop_toBottomOf="@+id/txtCiudadActual" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -83,7 +93,7 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="000000"
-                android:inputType="numberSigned"
+                android:inputType="phone"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

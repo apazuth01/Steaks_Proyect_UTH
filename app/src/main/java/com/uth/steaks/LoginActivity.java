@@ -1,6 +1,7 @@
 package com.uth.steaks;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseUser mCurrenUser;
     private String credentialID;
     EditText phone, editCode;
+    TextView ciudadActual;
     String Phone;
     String code, getCity;
     private String token = "";
@@ -72,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
 
         locationStart();
 
+        ciudadActual = findViewById(R.id.txtCiudadActual);
 
 
         mAuth  = FirebaseAuth.getInstance();
@@ -166,8 +170,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    SharedPreferences sharedPreferences = getSharedPreferences("getToken",MODE_PRIVATE);
-                    token = sharedPreferences.getString("token",null);
 
                     db.collection("clt_clientes")
                             .whereEqualTo("doc_telefono",Phone)
@@ -195,13 +197,22 @@ public class LoginActivity extends AppCompatActivity {
                                            maps.put("doc_telefono", Phone);
                                            maps.put("doc_photo", "https://firebasestorage.googleapis.com/v0/b/provenir-steaks.appspot.com/o/user.png?alt=media&token=c7d36336-2370-4a27-91d5-0a37fc77369b");
                                            maps.put("doc_token", token);
-                                           maps.put("doc_ciudad", getCity);
+                                           if(getCity == null){
+                                               maps.put("doc_ciudad", "Sin Ciudad");
+                                           }else{
+                                               maps.put("doc_ciudad", getCity);
+                                           }
+                                           maps.put("doc_delivery", false);
 
                                            db.collection("clt_clientes").document(Phone).set(maps);
                                        }else{
                                            Map<String, Object> map = new HashMap<>();
                                            map.put("doc_token", token);
-                                           map.put("doc_ciudad", getCity);
+                                           if(getCity == null){
+                                               map.put("doc_ciudad", "Sin Ciudad");
+                                           }else{
+                                               map.put("doc_ciudad", getCity);
+                                           }
 
                                            db.collection("clt_clientes").document(Phone).update(map);
                                        }
@@ -267,6 +278,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint("SetTextI18n")
     public void setLocation(Location loc) {
         if (loc.getLatitude() != 0.0 && loc.getLongitude() != 0.0) {
             try {
@@ -276,7 +288,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (!list.isEmpty()) {
                     Address city = list.get(0);
                     getCity = city.getLocality();
-                    Log.d("TAGCity", "setLocation: "+getCity);
+                    ciudadActual.setText("Ciudad : "+getCity);
+
                 }
             } catch (IOException e) {
                 e.printStackTrace();

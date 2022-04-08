@@ -1,5 +1,6 @@
 package com.uth.steaks;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -13,9 +14,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.uth.steaks.databinding.ActivityMainBinding;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
-
-
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -40,16 +41,21 @@ public class MainActivity extends AppCompatActivity {
         String Phone = sharedPreferences.getString("phone",null);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
-        db.collection("clt_clientes").document(Phone)
-                .get()
-                .addOnCompleteListener(task -> {
-                   if (task.getResult().get("doc_delivery").equals(true)){
-                       bottomNavigationView.getMenu().getItem(3).setVisible(true);
-                   }else{
-                       bottomNavigationView.getMenu().getItem(3).setVisible(false);
-                   }
+        if(Phone != null){
+            db.collection("clt_clientes").document(Phone)
+                    .get()
+                    .addOnCompleteListener(task -> {
+                        if (Objects.equals(task.getResult().get("doc_delivery"), true)){
+                            bottomNavigationView.getMenu().getItem(3).setVisible(true);
+                        }else{
+                            bottomNavigationView.getMenu().getItem(3).setVisible(false);
+                        }
+                    });
+        }else{
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
 
-                });
+        }
 
 
     }
